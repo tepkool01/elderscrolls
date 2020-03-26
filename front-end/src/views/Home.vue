@@ -46,7 +46,6 @@ export default {
 	},
 	methods: {
 		loadMore() {
-			console.debug('>>loadMore()');
 			window.onscroll = () => {
 				const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight;
 				const closeToBottom = document.documentElement.offsetHeight * 0.95;
@@ -68,8 +67,6 @@ export default {
 			};
 		},
 		searchByName() {
-			console.debug('>>searchByName(})');
-
 			// Setting up a timer so that we don't blast the API with requests
 			if (this.timer) {
 				clearTimeout(this.timer);
@@ -78,15 +75,14 @@ export default {
 			this.timer = setTimeout(() => {
 				api.getCards(this.searchName).then((result) => {
 					this.cards = result.cards;
-				}).catch((error) => console.error('Discovered an error', error));
+				});
 			}, 400);
 		},
 		retrieveInitialCards() {
-			console.debug('>>retrieveInitialCards()');
 			// Initial cards don't have a name, so we can can omit that param
 			api.getCards().then((result) => {
 				this.cards = result.cards;
-			}).catch((error) => console.error('Discovered an error', error));
+			});
 		},
 	},
 	// Seed the initial page load with 20 cards
