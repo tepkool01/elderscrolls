@@ -14,6 +14,7 @@ module.exports = {
 		"indent": [2, "tab", {"SwitchCase": 1, "VariableDeclarator": 1}],
 		"no-tabs": 0,
 		"dot-notation": 0,
+		"linebreak-style": 0,
 		'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 		'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 	},
