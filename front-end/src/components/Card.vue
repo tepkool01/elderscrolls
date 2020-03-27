@@ -1,10 +1,27 @@
 <template>
-    <div>
-        <img :src="imgUrl" :alt="name" class="img" />
-        <h4 class="title">{{ name }}</h4>
-        <p class="type">Type: {{ type }}</p>
-        <p class="set">Set: {{ setName }}</p>
-        <p class="description">Description: {{ description }}</p>
+    <div class="card">
+        <div class="title">{{ name }}</div>
+        <div class="body-block">
+            <div class="img-container">
+                <img :src="imgUrl" :alt="name" class="img" />
+            </div>
+            <div class="info-container">
+                <div class="info-block">
+                    <label>Type</label>
+                    <span class="type">{{ type }}</span>
+                </div>
+
+                <div class="info-block">
+                    <label>Set</label>
+                    <span class="set">{{ setName }}</span>
+                </div>
+
+                <div class="info-block">
+                    <label>Text</label>
+                    <span class="description">{{ description }}</span>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -37,16 +54,53 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div {
-    border: 5px solid black;
-    max-width: 300px;
-    padding: 10px;
+$color_white: #fff;
+$color_grey: #e2e2e2;
+$background: #2c3e50;
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 400px;
+    min-height: 400px;
+    padding: 0;
     text-align: left;
+    margin: auto auto;
+    background-color: $color_grey;
+
+    .img-container {
+        float: left;
+        width: 200px;
+        position: relative;
+        .img {
+            max-height: 100%;
+            max-width: 100%;
+        }
+    }
     .title {
+        font-size: 1.25rem;
+        font-weight: 700;
         text-align: center;
+        background: $background;
+        color: $color_white;
+        padding: 15px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     }
-    .img {
-        width: 100%;
+
+    .info-block {
+        margin-bottom: 10px;
+        label {
+            display:block;
+            font-weight: 600;
+        }
     }
+
+    .body-block {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 </style>

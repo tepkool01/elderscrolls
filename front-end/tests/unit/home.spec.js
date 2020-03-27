@@ -57,4 +57,21 @@ describe('Home.vue', () => {
 			expect(wrapper.find('.errorMsg').text()).toBe('Could not find any matching cards.');
 		}, 1000);
 	});
+
+	test('returns 1 result when searching', async () => {
+		const wrapper = mount(Home, {
+			data() {
+				return {
+					cards: [],
+					searchName: 'Redoran Enforcer',
+					loading: false,
+					reachedEnd: false,
+				}
+			}
+		});
+
+		setTimeout(() => {
+			expect(wrapper.findAll(Card).length).toBe(1);
+		},1000);
+	});
 });

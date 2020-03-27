@@ -1,20 +1,15 @@
 <template>
     <div class="home">
-        <label for="search">Search</label>
         <!-- Search box that will update the below DOM elements -->
-        <input @keyup="searchByName"
-               v-model="searchName"
-               type="text"
-               id="search"
-               placeholder="Some name, i.e. Redoran Enforcer"
-        />
-
-        <!-- Tips to help guide the user's search -->
-        <ul>
-            <li>Search by name, i.e. 'guard'</li>
-            <li>Search by list of names, i.e. guard,prophecy</li>
-            <li>Search by list of names that are optional, i.e. guard|prophecy</li>
-        </ul>
+        <div class="search-container">
+            <input @keyup="searchByName"
+                   v-model="searchName"
+                   type="text"
+                   id="search"
+                   placeholder="Some name, i.e. Redoran Enforcer"
+                   autocomplete="off"
+            />
+        </div>
 
         <!-- Iterate over all the cards held in data and display them on the page -->
         <div class="cards" v-if="cards.length > 0">
@@ -28,7 +23,7 @@
                   data-aos="fade-up"
             />
         </div>
-        <div class="errorMsg">
+        <div v-else class="errorMsg">
             Could not find any matching cards.
         </div>
     </div>
@@ -97,6 +92,7 @@ export default {
 	created() {
 		this.retrieveCards();
 	},
+	// Create the listener for seeing where they are on the page, which will load more
 	mounted() {
 		this.loadMore();
 	},
@@ -109,6 +105,31 @@ export default {
     margin: 0 auto;
     display: grid;
     grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+input[type=text] {
+    width: 350px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('../assets/searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 100%;
+}
+.search-container {
+    max-width: 1000px;
+    margin: 10px auto 20px;
+}
+.search-tips {
+    text-align: left;
 }
 </style>
