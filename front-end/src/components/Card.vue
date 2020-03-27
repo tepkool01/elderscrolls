@@ -1,11 +1,10 @@
 <template>
     <div>
-        <!-- Image, Name, Text, Set Name, and Type. -->
-        <img :src="data.imageUrl" />
-        <h4>Name: {{ data.name }}</h4>
-        <p>Type: {{ data.type }}</p>
-        <p>Set Name: {{ data.set.name }}</p>
-        <p>Text: {{ data.text }}</p>
+        <img :src="imgUrl" :alt="name" class="img" />
+        <h4 class="title">{{ name }}</h4>
+        <p class="type">Type: {{ type }}</p>
+        <p class="set">Set: {{ setName }}</p>
+        <p class="description">Description: {{ description }}</p>
     </div>
 </template>
 
@@ -13,16 +12,41 @@
 export default {
 	name: 'Card',
 	props: {
-		data: Object,
+		imgUrl: {
+			type: String,
+			default: '',
+		},
+		name: {
+			type: String,
+			default: 'N/A',
+		},
+		type: {
+			type: String,
+			default: 'N/A',
+		},
+		setName: {
+			type: String,
+			default: 'N/A',
+		},
+		description: {
+			type: String,
+			default: 'N/A',
+		},
 	},
 };
 </script>
 
 <style lang="scss" scoped>
 div {
-    border: 1px solid black;
-    img {
-        width: 50%;
+    border: 5px solid black;
+    max-width: 300px;
+    padding: 10px;
+    text-align: left;
+    .title {
+        text-align: center;
+    }
+    .img {
+        width: 100%;
     }
 }
 </style>

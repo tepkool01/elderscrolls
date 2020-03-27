@@ -14,6 +14,10 @@ This app is a prototype for retrieving elder scroll cards in an infinite scrolli
 1. Navigate to the front-end folder `cd front-end`
 2. Run `npm run serve`
 
+## Running the unit tests
+1. Navigate to the front-end folder `cd front-end`
+2. Run `npm run test:unit`
+
 ---
 
 # Considerations
@@ -23,4 +27,4 @@ This app is a prototype for retrieving elder scroll cards in an infinite scrolli
 - Chose promises against async/await
 - Chose to put constants at top of the file rather than placing in a config file
 - Didn't need to use the state/store, but could've taken advantage of it for the 'nextLink'
-- Unsure of input sanitization
+- Loading bar in the case of multiple API calls would need to be refactored to have the concept of a loader state

@@ -8,18 +8,28 @@
                id="search"
                placeholder="Some name, i.e. Redoran Enforcer"
         />
-        <span>
-            Search by name or sets of names, i.e. bob|karen
-            (matching one or the other) or bob,karen (matching 2 names)
-        </span>
+
+        <!-- Tips to help guide the user's search -->
+        <ul>
+            <li>Search by name, i.e. 'guard'</li>
+            <li>Search by list of names, i.e. guard,prophecy</li>
+            <li>Search by list of names that are optional, i.e. guard|prophecy</li>
+        </ul>
 
         <!-- Iterate over all the cards held in data and display them on the page -->
-        <div class="cards">
+        <div class="cards" v-if="cards.length > 0">
             <Card v-for="card in cards"
                   :key="card.id"
-                  :data="card"
+                  :imgUrl="card.imageUrl"
+                  :name="card.name"
+                  :type="card.type"
+                  :setName="card.set.name"
+                  :description="card.text"
                   data-aos="fade-up"
             />
+        </div>
+        <div class="errorMsg">
+            Could not find any matching cards.
         </div>
     </div>
 </template>
@@ -73,21 +83,19 @@ export default {
 				this.timer = null;
 			}
 			this.timer = setTimeout(() => {
-				api.getCards(this.searchName).then((result) => {
-					this.cards = result.cards;
-				});
+				this.retrieveCards(this.searchName);
 			}, 400);
 		},
-		retrieveInitialCards() {
+		retrieveCards(searchName = '') {
 			// Initial cards don't have a name, so we can can omit that param
-			api.getCards().then((result) => {
+			api.getCards(searchName).then((result) => {
 				this.cards = result.cards;
 			});
 		},
 	},
 	// Seed the initial page load with 20 cards
 	created() {
-		this.retrieveInitialCards();
+		this.retrieveCards();
 	},
 	mounted() {
 		this.loadMore();
