@@ -12,7 +12,7 @@
         </div>
 
         <!-- Iterate over all the cards held in data and display them on the page -->
-        <div class="cards" v-if="cards.length > 0">
+        <div class="cards">
             <Card v-for="card in cards"
                   :key="card.id"
                   :imgUrl="card.imageUrl"
@@ -23,7 +23,7 @@
                   data-aos="fade-up"
             />
         </div>
-        <div v-else class="errorMsg">
+        <div v-if="loading === false && cards.length === 0" class="errorMessage">
             Could not find any matching cards.
         </div>
     </div>
@@ -82,8 +82,10 @@ export default {
 			}, 400);
 		},
 		retrieveCards(searchName = '') {
+			this.loading = true;
 			// Initial cards don't have a name, so we can can omit that param
 			api.getCards(searchName).then((result) => {
+				this.loading = false;
 				this.cards = result.cards;
 			});
 		},

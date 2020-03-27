@@ -21,6 +21,15 @@ This app is a prototype for retrieving elder scroll cards in an infinite scrolli
 ---
 
 # Considerations
+
+A list of general notes during the creation of this app.
+
+## Notes
+
+- The loading bar at the top exists, but might be considered small to see. There is also a text string within the body as a back-up. There are alternative loading indicators to add.
+
+## Improvements
+
 - Could have used Nuxt for better SEO, improved layout, etc, but trying to keep everything ***simple***
 - Could have used slots, but decided to lay out everything in a single Card component
 - Could have broken API into modules, but there is only one central call
