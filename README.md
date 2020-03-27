@@ -1,5 +1,10 @@
 # Elder Scrolls APP
 This app is a prototype for retrieving elder scroll cards in an infinite scrolling fashion.
+### Urls
+(CDN and Main are fastest)
+#### Main : https://elderscrollfinder.com/
+#### CDN : https://d19y9qfqz2fe67.cloudfront.net
+#### S3 : http://elderscrollfinder.com.s3-website-us-east-1.amazonaws.com
 
 ## Prerequisites
 - npm version 6.13.4 
@@ -32,6 +37,8 @@ A list of general notes during the creation of this app.
 - Works well on iPhone X, Chrome, Firefox
     - Has some interesting behavior on IE 11 (see improvements)
 - Tested on Mac and three different versions of windows
+- Passed W3 validation
+- Score of 95 on google speed insights, primarily due to the remote images being included: https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Felderscrollfinder.com%2F
 
 ## Improvements
 
