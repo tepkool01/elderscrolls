@@ -105,35 +105,29 @@ export default {
 
 <style lang="scss" scoped>
 .cards {
-    max-width: 1920px;
-    margin: 0 auto;
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+	max-width: 1920px;
+	margin: 0 auto;
+	display: grid;
+	grid-gap: 1rem;
+	grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
 }
 input[type=text] {
-    width: 350px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-image: url('../assets/searchicon.png');
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
+	width: 20rem;
+	box-sizing: border-box;
+	border: 1px solid #e5e7eb;
+	border-radius: 4px;
+	font-size: 16px;
+	background: white url('../assets/searchicon.png') no-repeat 10px 10px;
+	padding: 12px 20px 12px 40px;
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
 }
 
 input[type=text]:focus {
-    width: 100%;
+	width: 100%;
 }
 .search-container {
-    max-width: 1000px;
-    margin: 10px auto 20px;
-}
-.search-tips {
-    text-align: left;
+	max-width: 1000px;
+	margin: 10px auto 20px;
 }
 </style>

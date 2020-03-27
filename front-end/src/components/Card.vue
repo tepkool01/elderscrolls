@@ -1,10 +1,16 @@
 <template>
     <div class="card">
+		<!-- Card block title/name -->
         <div class="title">{{ name }}</div>
         <div class="body-block">
+			<!-- Main image div for a card -->
             <div class="img-container">
-                <img :src="imgUrl" :alt="name" class="img" />
+				<!-- Adding some fade-in transition for low-bandwidth consumers -->
+				<transition name="fade">
+					<img :src="imgUrl" :alt="name" @load="imgLoaded = true" v-show="imgLoaded" class="img" />
+				</transition>
             </div>
+			<!-- Card details block -->
             <div class="info-container">
                 <div class="info-block">
                     <label>Type</label>
@@ -50,57 +56,75 @@ export default {
 			default: 'N/A',
 		},
 	},
+	data() {
+		return {
+			imgLoaded: false,
+		};
+	},
 };
 </script>
 
 <style lang="scss" scoped>
-$color_white: #fff;
-$color_grey: #e2e2e2;
+$white: #fff;
+$grey-500: #161e2e;
+$grey-300: #6b7280;
+$grey-200: #e5e7eb;
 $background: #2c3e50;
 
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 400px;
-    min-height: 400px;
-    padding: 0;
-    text-align: left;
-    margin: auto auto;
-    background-color: $color_grey;
-
-    .img-container {
-        float: left;
-        width: 200px;
-        position: relative;
-        .img {
-            max-height: 100%;
-            max-width: 100%;
-        }
-    }
-    .title {
-        font-size: 1.25rem;
-        font-weight: 700;
-        text-align: center;
-        background: $background;
-        color: $color_white;
-        padding: 15px;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    }
-
-    .info-block {
-        margin-bottom: 10px;
-        label {
-            display:block;
-            font-weight: 600;
-        }
-    }
-
-    .body-block {
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
+	transition: 0.3s;
+	width: 420px;
+	min-height: 400px;
+	padding: 0;
+	text-align: left;
+	margin: auto auto;
+	background-color: $white;
+	border: 1px solid $grey-200;
+	border-radius: .5rem;
+}
+.img-container {
+	float: left;
+	width: 200px;
+	min-height: 324.2px;
+	position: relative;
+	.img {
+		max-height: 100%;
+		max-width: 100%;
+	}
+}
+.title {
+	font-size: 1.25rem;
+	font-weight: 700;
+	text-align: center;
+	background: $white;
+	margin: 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid $grey-200;
+}
+.info-block {
+	color: $grey-500;
+	margin-bottom: 0.625rem;
+	margin-right: 0.25rem;
+	label {
+		display:block;
+		color: $grey-300;
+		font-size: .875rem;
+	}
+}
+.body-block {
+	padding-top: 0.625rem;
+	padding-bottom: 0.625rem;
 }
 .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	box-shadow: 0 3px 4px 0 rgba(0,0,0,.07);
+}
+.fade-enter-active {
+	transition: opacity 3s ease-in-out;
+}
+.fade-enter-to {
+	opacity: 1;
+}
+.fade-enter {
+	opacity: 0;
 }
 </style>

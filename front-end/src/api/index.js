@@ -30,8 +30,6 @@ export default {
 	 * @returns {Promise<Array>}
 	 */
 	getCards(name = '') {
-		console.debug('>>getCards()');
-
 		// Construct the query string for the URL; concatenate it if invoked with 'name' parameter
 		let queryString = `pageSize=${RESULTS_PER_PAGE}`;
 		if (name.length > 0) {
@@ -55,8 +53,6 @@ export default {
 	 * @returns {Promise<Array>}
 	 */
 	loadMore() {
-		console.debug('>>loadMore()');
-
 		return new Promise((resolve, reject) => {
 			// Only make a call if the next link has content
 			if (nextLink.endOfResults === false) {
