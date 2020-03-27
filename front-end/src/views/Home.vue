@@ -63,7 +63,8 @@ export default {
 						.catch((error) => {
 							// HTTP Status Failure or reached the end of content (expected behavior)
 							if (error.response) {
-								console.error(error.response);
+								// could do something here depending on the 4xx or 5xx status codes
+								// console log statements are not allowed in the linter
 							}
 						});
 				}
@@ -87,7 +88,8 @@ export default {
 				})
 				.catch((error) => {
 					if (error.response) {
-						console.error(error.response);
+						// could do something here depending on the 4xx or 5xx status codes
+						// console log statements are not allowed in the linter
 					}
 				});
 		},
@@ -129,5 +131,19 @@ input[type=text]:focus {
 .search-container {
 	max-width: 1000px;
 	margin: 10px auto 20px;
+}
+@media screen and (max-width: 480px) {
+	.cards {
+		max-width: 400px;
+		margin: 0;
+		display: grid;
+		grid-gap: 0;
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	}
+
+	input[type=text] {
+		max-width: 100%;
+		border-radius: 0;
+	}
 }
 </style>

@@ -127,4 +127,25 @@ $background: #2c3e50;
 .fade-enter {
 	opacity: 0;
 }
+@media screen and (max-width: 480px) {
+	.img-container {
+		float: none !important;
+		margin: 0 auto;
+	}
+
+	.card {
+		padding: 0;
+		width: 100%;
+		margin: 0 0 1rem;
+		border-radius: 0;
+	}
+
+	body {
+		padding: 0 !important;
+	}
+
+	.info-block {
+		margin: 15px;
+	}
+}
 </style>
