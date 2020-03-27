@@ -35,5 +35,5 @@ A list of general notes during the creation of this app.
 - Could have broken API into modules, but there is only one central call
 - Chose promises against async/await
 - Chose to put constants at top of the file rather than placing in a config file
-- Didn't need to use the state/store, but could've taken advantage of it for the 'nextLink'
+- Could have modularized the state, but didn't have enough use-cases to structure it for scalability
 - Loading bar in the case of multiple API calls would need to be refactored to have the concept of a loader state

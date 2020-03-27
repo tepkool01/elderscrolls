@@ -23,14 +23,14 @@
                   data-aos="fade-up"
             />
         </div>
-        <div v-if="loading === false && cards.length === 0" class="errorMessage">
+        <div v-if="currentLoadingStatus === false && cards.length === 0" class="errorMessage">
             Could not find any matching cards.
         </div>
     </div>
 </template>
 
 <script>
-// @ is an alias to /src
+import { mapGetters } from 'vuex';
 import Card from '../components/Card.vue';
 import api from '../api';
 
@@ -40,15 +40,14 @@ export default {
 	components: {
 		Card,
 	},
-	// Need an array to hold our retrieved card data, and a loading boolean to indicate processing
+	// Need an array to hold our retrieved card data, and search input box
 	data() {
 		return {
 			cards: [],
 			searchName: '',
-			loading: false,
-			reachedEnd: false,
 		};
 	},
+	computed: mapGetters(['currentLoadingStatus']),
 	methods: {
 		loadMore() {
 			window.onscroll = () => {
@@ -56,17 +55,16 @@ export default {
 				const closeToBottom = document.documentElement.offsetHeight * 0.95;
 				// First check if it is currently loading new DOM elements so multiple calls aren't
 				// Issued, then see if we are at the end of the screen (95%)
-				if (this.loading === false && bottomOfWindow >= closeToBottom) {
-					this.loading = true;
+				if (this.currentLoadingStatus === false && bottomOfWindow >= closeToBottom) {
 					api.loadMore()
 						.then((result) => {
 							this.cards = this.cards.concat(result.cards);
 						})
-						.catch(() => {
-							this.reachedEnd = true;
-						})
-						.finally(() => {
-							this.loading = false;
+						.catch((error) => {
+							// HTTP Status Failure or reached the end of content (expected behavior)
+							if (error.response) {
+								console.error(error.response);
+							}
 						});
 				}
 			};
@@ -82,12 +80,16 @@ export default {
 			}, 400);
 		},
 		retrieveCards(searchName = '') {
-			this.loading = true;
 			// Initial cards don't have a name, so we can can omit that param
-			api.getCards(searchName).then((result) => {
-				this.loading = false;
-				this.cards = result.cards;
-			});
+			api.getCards(searchName)
+				.then((result) => {
+					this.cards = result.cards;
+				})
+				.catch((error) => {
+					if (error.response) {
+						console.error(error.response);
+					}
+				});
 		},
 	},
 	// Seed the initial page load with 20 cards
