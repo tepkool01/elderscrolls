@@ -42,6 +42,15 @@ A list of general notes during the creation of this app.
 
 ## Improvements
 
+- You can use sophisticated validation RegEx and libraries, but I am going for the POC version of this security, due to being unaware of what the backend checks.
+- Testing went on for too long, and many areas for improvement / expansion and general clean up / commenting
+    - I'm happy with 100% statement coverage across the major components, and 84.62% branch coverage (there are 2 unusual cases to check for)
+    - Testing even the simplest things while approaching 'Exhaustive' testing can take a **very** long time
+    - Testing needs to be DRY, have beforeEach hooks, separate TestData folder, etc
+- Could have improved error messaging and handling (fade effects, better information for UX, box closing)
+    - Error box is quite ugly, but I didn't spend much time on it because it was a late addition add on
+    - Error boxes should be stacked when multiple issues occur
+    - Could've also implemented retries in API calls
 - IE is making all of the elements in one column, beyond scope of this project
 - Could have used Nuxt for better SEO, improved layout, etc, but trying to keep everything ***simple***
     - Nuxt isn't required, but makes set-up easier

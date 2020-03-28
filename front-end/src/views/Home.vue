@@ -33,6 +33,7 @@
 import { mapGetters } from 'vuex';
 import Card from '../components/Card.vue';
 import api from '../api';
+import { EventBus } from '../eventBus';
 
 export default {
 	name: 'Home',
@@ -60,11 +61,11 @@ export default {
 						.then((result) => {
 							this.cards = this.cards.concat(result.cards);
 						})
-						.catch((error) => {
+						.catch((response) => {
 							// HTTP Status Failure or reached the end of content (expected behavior)
-							if (error.response) {
+							if (response.status !== 200) {
 								// could do something here depending on the 4xx or 5xx status codes
-								// console log statements are not allowed in the linter
+								EventBus.setAlert('Error', 1, response.error);
 							}
 						});
 				}
@@ -77,8 +78,16 @@ export default {
 				this.timer = null;
 			}
 			this.timer = setTimeout(() => {
+				if (this.isInvalidName()) {
+					EventBus.setAlert('Info', 2, 'Invalid characters.');
+					return;
+				}
 				this.retrieveCards(this.searchName);
 			}, 400);
+		},
+		// Basic SQL regex checker
+		isInvalidName() {
+			return /[\t\r\n]|(--[^\r\n]*)|(\/\*[\w\W]*?(?=\*)\*\/)/gi.test(this.searchName);
 		},
 		retrieveCards(searchName = '') {
 			// Initial cards don't have a name, so we can can omit that param
@@ -86,10 +95,10 @@ export default {
 				.then((result) => {
 					this.cards = result.cards;
 				})
-				.catch((error) => {
-					if (error.response) {
+				.catch((response) => {
+					if (response.status !== 200) {
 						// could do something here depending on the 4xx or 5xx status codes
-						// console log statements are not allowed in the linter
+						EventBus.setAlert('Error', 1, response.error);
 					}
 				});
 		},
