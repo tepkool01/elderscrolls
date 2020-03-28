@@ -51,6 +51,7 @@ A list of general notes during the creation of this app.
     - Error box is quite ugly, but I didn't spend much time on it because it was a late addition add on
     - Error boxes should be stacked when multiple issues occur
     - Could've also implemented retries in API calls
+    - Error box is not fast on mobile
 - IE is making all of the elements in one column, beyond scope of this project
 - Could have used Nuxt for better SEO, improved layout, etc, but trying to keep everything ***simple***
     - Nuxt isn't required, but makes set-up easier
@@ -60,5 +61,6 @@ A list of general notes during the creation of this app.
 - Chose to put constants at top of the file rather than placing in a config file
 - Could have modularized the state, but didn't have enough use-cases to structure it for scalability
 - Loading bar in the case of multiple API calls would need to be refactored to have the concept of a loader state
+- Loading indicator within the images would've been useful for low-bandwidth phone users
 - Thinking about aligning front-end **security** with API via validating input strings to contain characters allowed 
 by name searches (alphanumeric | and , and spaces? and potentially other allowable characters for the white-list)
